@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
 @endpush
 
-@section('Factories')
+@section('title','Factories')
 @section('content')
 
 
@@ -20,7 +20,6 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title mr-3"><a class="btn btn-primary" href="{{ route('factories.create')}}">Create</a></h3>
-                <h3 class="card-title"><a class="btn btn-primary" href="{{ route('factories.trashed')}}">Trashed</a></h3>
 
               </div>
               <!-- /.card-header -->
@@ -47,7 +46,7 @@
                                 <td><img src="{{ asset('uploads/factories/' . $factory->image) }}" width="40px" height="40px" alt=""></td>
                                 <td>{{$factory->id}}</td>
                                 <td>{{$factory->name}}</td>
-                                <td>{{$factory->description}}</td>
+                                <td><a class="btn btn-primary" href="{{ route('descriptions.indexFactory', ['id' => $factory->id]) }}">View</a></td>
                                 <td>{{$factory->category->name}}</td>
                                 <td>{{$factory->created_at}}</td>
                                 <td>{{$factory->updated_at}}</td>

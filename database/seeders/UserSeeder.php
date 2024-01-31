@@ -20,11 +20,17 @@ class UserSeeder extends Seeder
                 'name' => 'Jaafar Alwahsh',
                 'email' => 'jaafar@gmail.com',
                 'password' => Hash::make('Password'),
-                'type' => 'admin'
+                'type' => 'super admin'
             ],
             [
                 'name' => 'Mohammad Alwahsh',
                 'email' => 'mohammad@gmail.com',
+                'password' => Hash::make('Password'),
+                'type' => 'admin'
+            ],
+            [
+                'name' => 'Ammar Alwahsh',
+                'email' => 'ammar@gmail.com',
                 'password' => Hash::make('Password'),
                 'type' => 'user'
             ],

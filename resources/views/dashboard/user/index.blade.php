@@ -7,8 +7,7 @@
     <link rel="stylesheet" href="{{asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
 @endpush
 
-@section('title','categories')
-
+@section('title','users')
 @section('content')
 
 
@@ -20,7 +19,7 @@
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title mr-3"><a class="btn btn-primary" href="{{ route('categories.create')}}">Create</a></h3>
+                <h3 class="card-title mr-3"><a class="btn btn-primary" href="{{ route('users.create')}}">Create</a></h3>
 
               </div>
               <!-- /.card-header -->
@@ -30,27 +29,27 @@
                   <tr>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>Discription</th>
+                    <th>email</th>
+                    <th>Type</th>
                     <th>Created at</th>
                     <th>Updated at</th>
-                    <th>Deleted at</th>
                     <th>Edit</th>
                     <th>Delete</th>
                   </tr>
                   </thead>
                   <tbody>
-                    @if ($categories)
-                        @foreach ($categories as $category)
+                    @if ($users)
+                        @foreach ($users as $user)
                             <tr>
-                                <td>{{$category->id}}</td>
-                                <td>{{$category->name}}</td>
-                                <td>{{$category->description}}</td>
-                                <td>{{$category->created_at}}</td>
-                                <td>{{$category->updated_at}}</td>
-                                <td>{{$category->deleted_at}}</td>
-                                <td><a class="btn btn-primary" href="{{ route('categories.edit', ['category' => $category->id]) }}">Edit</a></td>
+                                <td>{{$user->id}}</td>
+                                <td>{{$user->name}}</td>
+                                <td>{{$user->email}}</td>
+                                <td>{{$user->type}}</td>
+                                <td>{{$user->created_at}}</td>
+                                <td>{{$user->updated_at}}</td>
+                                <td><a class="btn btn-primary" href="{{ route('users.edit', ['user' => $user->id]) }}">Edit</a></td>
                                 <td>
-                                    <form action="{{ route('categories.destroy', ['category' => $category->id]) }}" method="post">
+                                    <form action="{{ route('users.destroy', ['user' => $user->id]) }}" method="post">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-danger" type="submit">Delete</button>
@@ -60,7 +59,7 @@
                         @endforeach
                     @else
                         <tr>
-                            <td>No categories</td>
+                            <td>No users</td>
                         </tr>
                     @endif
 

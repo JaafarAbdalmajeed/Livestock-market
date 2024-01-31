@@ -1,6 +1,7 @@
 @extends('layouts.dashboard')
 
-@section('title', 'create')
+@section('title', 'edit user')
+
 
 @section('content')
     <div class="content">
@@ -8,11 +9,12 @@
             <section class="content" style="height: 100%;">
                 <div class="card card-primary">
                     <div class="card-header">
-                    <h3 class="card-title">Add Product</h3>
+                    <h3 class="card-title">Edit </h3>
                     </div>
-                    <form action="{{ route('products.store')}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('users.update', ['user' => $user->id])}}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        @include('dashboard.product.form')
+                        @method('PATCH')
+                        @include('dashboard.user.form')
                     </form>
                 </div>
             </section>

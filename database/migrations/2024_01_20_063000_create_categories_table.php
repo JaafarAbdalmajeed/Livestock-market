@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('factories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description');
             $table->foreignId('category_id')->constrained('categories');
             $table->string('image');
             $table->timestamps();

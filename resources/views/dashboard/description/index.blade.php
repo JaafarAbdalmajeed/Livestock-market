@@ -7,8 +7,7 @@
     <link rel="stylesheet" href="{{asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
 @endpush
 
-@section('title','categories')
-
+@section('title','descriptions')
 @section('content')
 
 
@@ -20,47 +19,80 @@
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title mr-3"><a class="btn btn-primary" href="{{ route('categories.create')}}">Create</a></h3>
+                @if ($nameTable == 'factories')
+                <h3 class="card-title mr-3"><a class="btn btn-primary" href="{{route('descriptions.createFactory' , ['id' => $factory_id])}}">Create</a></h3>
+                @else
+                <h3 class="card-title mr-3"><a class="btn btn-primary" href="{{ route('descriptions.createProduct' , ['id' => $product_id])}}">Create</a></h3>
+                @endif
+
 
               </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Discription</th>
-                    <th>Created at</th>
-                    <th>Updated at</th>
-                    <th>Deleted at</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                  </tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Text</th>
+                        @if (count($descriptions) > 0)
+                            @if ($descriptions[0]->factory)
+                                <th>Factory</th>
+                            @endif
+                            @if ($descriptions[0]->product)
+                                <th>Product</th>
+                            @endif
+                        @endif
+                        <th>Updated at</th>
+                        <th>Created at</th>
+                        <th>Deleted at</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
                   </thead>
                   <tbody>
-                    @if ($categories)
-                        @foreach ($categories as $category)
+                    @if ($descriptions)
+                        @foreach ($descriptions as $description)
                             <tr>
-                                <td>{{$category->id}}</td>
-                                <td>{{$category->name}}</td>
-                                <td>{{$category->description}}</td>
-                                <td>{{$category->created_at}}</td>
-                                <td>{{$category->updated_at}}</td>
-                                <td>{{$category->deleted_at}}</td>
-                                <td><a class="btn btn-primary" href="{{ route('categories.edit', ['category' => $category->id]) }}">Edit</a></td>
-                                <td>
-                                    <form action="{{ route('categories.destroy', ['category' => $category->id]) }}" method="post">
+                                <td>{{$description->id}}</td>
+                                <td>{{$description->title}}</td>
+                                <td>{{$description->text}}</td>
+
+                                @if ($description->factory)
+                                <td>{{$description->factory->name}}</td>
+                                @endif
+
+
+                                @if ($description->product)
+                                <td>{{$description->product->name}}</td>
+                                @endif
+
+
+                                <td>{{$description->created_at}}</td>
+                                <td>{{$description->updated_at}}</td>
+                                <td>{{$description->deleted_at}}</td>
+
+                                @if ($description->factory)
+                                <td><a class="btn btn-primary" href="{{ route('descriptions.editFactory', ['description_id' => $description->id , 'factory_id' => $description->factory->id]) }}">Edit</a></td>
+
+                                @endif
+
+                                @if ($description->product)
+                                <td><a class="btn btn-primary" href="{{ route('descriptions.editProduct', ['id' => $description->id]) }}">Edit</a></td>
+
+                                @endif
+                                {{-- <td>
+                                    <form action="{{ route('description.destroy', ['description' => $description->id , 'nameTable'=>'fcatories']) }}" method="post">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-danger" type="submit">Delete</button>
                                     </form>
-                                </td>
+                                </td> --}}
                             </tr>
                         @endforeach
                     @else
                         <tr>
-                            <td>No categories</td>
+                            <td>No descriptions</td>
                         </tr>
                     @endif
 

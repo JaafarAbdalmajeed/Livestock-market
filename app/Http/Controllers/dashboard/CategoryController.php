@@ -62,8 +62,8 @@ class CategoryController extends Controller
     {
         //
         $category = Category::find($id);
-        return Redirect::route('categories.edit')->with('category', $category);
-    }
+        return view('dashboard.category.edit', ['category' => $category]);
+        }
 
     /**
      * Update the specified resource in storage.

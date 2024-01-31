@@ -30,7 +30,8 @@ class FactoryController extends Controller
         //
 
         $categories = Category::all();
-        return view('dashboard.factory.create', compact('categories'));
+        $factory = new Factory();
+        return view('dashboard.factory.create', compact('categories','factory'));
     }
 
     /**
@@ -38,12 +39,6 @@ class FactoryController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string',
-            'description' => 'required|string',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif',
-            'category_id' => 'integer',
-        ]);
 
         // $uploadFile = new UploadFile();
 
@@ -59,7 +54,6 @@ class FactoryController extends Controller
 
         $data = [
             'name' => $request->name,
-            'description' => $request->description,
             'image' => $filename,
             'category_id' => $request->category_id,
         ];
@@ -102,12 +96,7 @@ class FactoryController extends Controller
         $factory = Factory::find($id);
 
         $oldImage = $factory->image;
-        $request->validate([
-            'name' => 'required|string',
-            'description' => 'required|string',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif',
-            'category_id' => 'integer',
-        ]);
+
 
         if($request->hasfile('image'))
         {
@@ -115,14 +104,19 @@ class FactoryController extends Controller
             $extension = $file->getClientOriginalExtension();
             $filename = time() . ''. $extension;
             $file->move('uploads/factories/', $filename);
+            $factory->image = $filename;
         }
 
-        $factory->update([
-            'name' => $request->name,
-            'description' => $request->description,
-            'category_id' => $request->category_id,
-            'image' => $filename,
-        ]);
+        $factory->name = $request->name;
+        $factory->category_id = $request->category_id;
+
+        $factory->save();
+
+        // $factory->update([
+        //     'name' => $request->name,
+        //     'category_id' => $request->category_id,
+        //     'image' => $filename,
+        // ]);
         return Redirect::route('factories.index');
     }
 

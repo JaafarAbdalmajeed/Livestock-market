@@ -16,10 +16,6 @@
             </select>
         </div>
 
-        <div class="form-group">
-        <label for="description">Description</label>
-        <textarea class="form-control" name="description" id="description" cols="30" rows="10">{{$factory->description ?? ''}}</textarea>
-        </div>
 
         <div class="form-group">
             <label for="exampleInputFile">Factory image</label>
@@ -32,7 +28,10 @@
                 <span class="input-group-text">Upload</span>
             </div>
             </div>
+
+            @if ($factory->image)
             <img src="{{ asset('uploads/factories/'. $factory->image)}}" width="50px" height="50px" alt="">
+            @endif
 
         </div>
 
