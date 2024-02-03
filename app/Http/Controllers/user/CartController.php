@@ -75,7 +75,7 @@
 
                     if ($cartItem) {
                         $cartItem->quantity = $quantity;
-                        $cartItem->save();
+                        $cartItem->update();
                         calculateTotal();
 
                         return response()->json(['status' => 'Quantity updated in the cart']);

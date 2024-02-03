@@ -2,8 +2,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\user\CartController;
+use App\Http\Controllers\user\UserController;
 use App\Http\Controllers\user\FactoryController;
 use App\Http\Controllers\user\ProductController;
+use App\Http\Controllers\user\CheckoutController;
 use App\Http\Controllers\user\FactoryDetailController;
 use App\Http\Controllers\user\ProductDetailController;
 
@@ -20,6 +22,11 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::post('/cart/delete', [CartController::class, 'deleteItem'])->name('cart.delete');
 
 
+    Route::get('checkout', [CheckoutController::class , 'index'])->name('checkout.index');
+    Route::post('place-order', [CheckoutController::class , 'place_order'])->name('place-order');
+
+    Route::get('/my-orders', [UserController::class , 'index'])->name('order.index');
+    Route::get('/view-order/{id}', [UserController::class , 'view'])->name('order.view');
 
 
 });
