@@ -18,6 +18,6 @@ class AdminMiddleware
         if (auth()->check() && auth()->user()->type == 'admin' || auth()->check() && auth()->user()->type == 'super admin') {
             return $next($request);
         }
-        return redirect('/');
+        return redirect()->route('user.index');
     }
 }

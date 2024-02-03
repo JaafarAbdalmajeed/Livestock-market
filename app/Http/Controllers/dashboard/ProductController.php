@@ -56,6 +56,12 @@ class ProductController extends Controller
 
     return redirect()->route('products.index');
 }
+
+    public function show()
+    {
+
+    }
+
     public function edit(string $id)
     {
         $product = Product::find($id);
