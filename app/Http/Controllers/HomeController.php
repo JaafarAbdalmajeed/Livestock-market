@@ -14,6 +14,6 @@ class HomeController extends Controller
         } else if (auth()->user()->type == 'user') {
             return view('user.index');
         }
-        return view('welcome');
+        return Redirect::route('user.index');
     }
 }

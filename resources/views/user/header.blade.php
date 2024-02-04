@@ -1,63 +1,45 @@
 <!-- ======= Header ======= -->
-<header id="header" class="header d-flex align-items-center fixed-top">
-    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+<header id="header" class="header  d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl m-3 d-flex align-items-center justify-content-between">
+        <a href="/" class="logo d-flex align-items-center">
+            <h1><img src="{{ asset('assets/img/4.jpg')}}"  width="90px" style="border-radius: 50%" class="img-fluid" style="width: 80px; height: 100%;"> FramFuel Feeds</h1>
+        </a>
 
-      <a href="index.html" class="logo d-flex align-items-center">
-        <!-- Uncomment the line below if you also wish to use an image logo -->
-        <!-- <img src="assets/img/logo.png" alt=""> -->
-        <h1>Logis</h1>
-      </a>
+        <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+        <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
 
-      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
-      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
-      <nav id="navbar" class="navbar">
-        <ul>
-          <li><a href="" class="active">Home</a></li>
-          <li><a href="{{ route('user.products')}}">Product</a></li>
-          <li><a href="{{ route('user.factories')}}">Factory</a></li>
-          <li><a href="{{ route('cart.index')}}">Cart</a></li>
-          <li><a href="{{ route('orders.index')}}">Order</a></li>
-          <li><a href="pricing.html">Pricing</a></li>
-          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+        <nav id="navbar" class=" navbar">
             <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
-            </ul>
-          </li>
-          <li>
-            @auth
+                <li ><a href="/" class="{{ Request::is('/') ? 'active' : '' }}"  id="home">Home</a></li>
 
+                <li><a class=" {{ Request::is('user.products') ? 'active' : '' }}" href="{{ route('user.products')}}">Livestock feed</a></li>
+                <li><a class=" {{ Request::is('user.factories') ? 'active' : '' }}" href="{{route('user.factories')}}">Factories</a></li>
+                @if(auth()->check())
+                <li><a class="{{ Request::is('order-cart*') ? 'active' : '' }}" href="{{route('cart.index')}}">Cart</a></li>
 
-                <!-- Sidebar user panel (optional) -->
-                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <li class=" m-0"><a class="get-a-quote" href="#"><span>{{ auth()->user()->name }}</span> </a>
 
-                    <div class="info">
-                    <a href="#" class="d-block">{{ Auth::user()->name }}</a>
-                    <form action="{{route('logout')}}" method="post">
+                </li>
+                <div class="image">
+                </div>
+                <li>
+                    <form class="m-0" action="{{ route('logout') }}" method="post">
                         @csrf
-                        <button class="btn btn-sm btn-outline-primary" type="submit">logout</button>
+                        <button class="border-0 get-a-quote" type="submit">Logout</button>
                     </form>
-                </div>
-                </div>
-                @endauth
+                </li>
 
-          </li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a class="get-a-quote" href="get-a-quote.html">Get a Quote</a></li>
-        </ul>
-      </nav><!-- .navbar -->
-
+                @else
+                <li>
+                    <a class="{{ Request::is('login') ? 'active' : '' }} get-a-quote" href="{{ route('login') }}">Login</a>
+                </li>
+                <li>
+                    <a class="{{ Request::is('register') ? 'active' : '' }} get-a-quote" href="{{ route('register') }}">Register</a>
+                </li>
+                @endif
+            </ul>
+        </nav>
     </div>
-  </header>
-  <!-- End Header -->
+
+</header>
+

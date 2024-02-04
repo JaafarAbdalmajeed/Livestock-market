@@ -1,65 +1,33 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\dashboard;
 
+use App\Models\Order;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class OrderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    //
     public function index()
     {
-        //
-        return view('dashboard.order.index');
+        $orders = Order::all();
+        return view('dashboard.order.index', compact('orders'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function orderAddress($id)
     {
-        //
+        $order = Order::find($id);
+        return view('dashboard.order.address-order', compact('order'));
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function orderItems($id)
     {
-        //
+        $order = Order::with('orderItems.products')->find($id);
+        return view('dashboard.order.items-order', compact('order'));
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Order $order)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Order $order)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Order $order)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Order $order)
-    {
-        //
+        $order = Order::find($id);
+        $order->delete();
+        return  redirect()->route('orders.index');
     }
 }

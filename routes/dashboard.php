@@ -38,8 +38,11 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::get('/description/factories/delete/{id}', [DescriptionController::class, 'destroyDescriptionProduct']) ->name('descriptions.destroyFactory');
     Route::get('/description/products/delete/{id}', [DescriptionController::class, 'destroyDescriptionFactory']) ->name('descriptions.destroyProduct');
 
+    Route::get('orders',[OrderController::class, 'index'])->name('orders.index');
+    Route::get('orders/{id}',[OrderController::class, 'destroy'])->name('orders.delete');
+    Route::get('orders/{id}/address/',[OrderController::class, 'orderAddress'])->name('orders.address');
+    Route::get('orders/{id}/items/',[OrderController::class, 'orderItems'])->name('orders.items');
 
-    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('/categories/trashed', [CategoryController::class, 'trashedCategories'])->name('categories.trashed');
     Route::get('/categories/trashed', [FactoryController::class, 'trashedFactories'])->name('factories.trashed');
 });
