@@ -5,6 +5,7 @@ use App\Http\Controllers\user\CartController;
 use App\Http\Controllers\user\UserController;
 use App\Http\Controllers\user\FactoryController;
 use App\Http\Controllers\user\ProductController;
+use App\Http\Controllers\user\ProfileController;
 use App\Http\Controllers\user\CheckoutController;
 use App\Http\Controllers\user\FactoryDetailController;
 use App\Http\Controllers\user\ProductDetailController;
@@ -20,6 +21,10 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::post('/cart/create', [CartController::class, 'addItem'])->name('cart.create');
     Route::post('/cart/update', [CartController::class, 'updateItem'])->name('cart.update');
     Route::post('/cart/delete', [CartController::class, 'deleteItem'])->name('cart.delete');
+
+    Route::get('profile/settings',[ProfileController::class, 'index'])->name('profile.index');
+    Route::post('/profile/settings',[ProfileController::class, 'update'])->name('profile.settings.update');
+
 
 
     Route::get('checkout', [CheckoutController::class , 'index'])->name('checkout.index');

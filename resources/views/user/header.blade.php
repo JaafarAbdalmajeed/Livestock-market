@@ -17,7 +17,7 @@
                 @if(auth()->check())
                 <li><a class="{{ Request::is('order-cart*') ? 'active' : '' }}" href="{{route('cart.index')}}">Cart</a></li>
 
-                <li class=" m-0"><a class="get-a-quote" href="#"><span>{{ auth()->user()->name }}</span> </a>
+                <li class=" m-0"><a class="get-a-quote" href="{{route('profile.index')}}"><span>{{ auth()->user()->name }}</span> </a>
 
                 </li>
                 <div class="image">
