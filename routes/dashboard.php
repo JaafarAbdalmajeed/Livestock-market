@@ -3,9 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\dashboard\UserController;
+use App\Http\Controllers\dashboard\AdminController;
 use App\Http\Controllers\dashboard\OrderController;
 use App\Http\Controllers\dashboard\FactoryController;
 use App\Http\Controllers\dashboard\ProductController;
+use App\Http\Controllers\dashboard\ProfileController;
 use App\Http\Controllers\dashboard\CategoryController;
 use App\Http\Controllers\dashboard\DescriptionController;
 
@@ -45,4 +47,7 @@ Route::middleware(['auth','admin'])->group(function () {
 
     Route::get('/categories/trashed', [CategoryController::class, 'trashedCategories'])->name('categories.trashed');
     Route::get('/categories/trashed', [FactoryController::class, 'trashedFactories'])->name('factories.trashed');
+    Route::get('/profile-info', [AdminController::class, 'index'])->name('admin_info');
+    Route::post('/update-profile-info', [AdminController::class, 'updateInfo'])->name('adminUpdateInfo');
+    Route::post('/update-image', [AdminController::class, 'uploadImage'])->name('profile.image');
 });

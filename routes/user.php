@@ -22,8 +22,6 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::post('/cart/update', [CartController::class, 'updateItem'])->name('cart.update');
     Route::post('/cart/delete', [CartController::class, 'deleteItem'])->name('cart.delete');
 
-    Route::get('profile/settings',[ProfileController::class, 'index'])->name('profile.index');
-    Route::post('/profile/settings',[ProfileController::class, 'update'])->name('profile.settings.update');
 
 
 
@@ -32,6 +30,10 @@ Route::middleware(['auth', 'user'])->group(function () {
 
     Route::get('/my-orders', [UserController::class , 'index'])->name('order.index');
     Route::get('/view-order/{id}', [UserController::class , 'view'])->name('order.view');
+    Route::get('/profile', [UserController::class , 'profile'])->name('profile');
+    Route::post('/update-user-info', [UserController::class, 'updateInfo'])->name('userUpdateInfo');
+    Route::post('/update-image-user', [UserController::class, 'uploadImage'])->name('profile.user.image');
+
 
 
 });

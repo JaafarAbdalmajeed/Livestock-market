@@ -7,6 +7,7 @@
     <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{csrf_token()}}">
     <title>@yield('title')</title>
 
     <!-- Google Font: Source Sans Pro -->
@@ -147,10 +148,10 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                    <img src="{{asset('dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
+                    <img src="{{asset('/uploads/users/' . Auth::user()->image)}}" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                    <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+                    <a href="{{route('admin_info')}}" class="d-block admin_name">{{ Auth::user()->name }}</a>
                     <form action="{{route('logout')}}" method="post">
                         @csrf
                         <button class="btn btn-sm btn-outline-primary" type="submit">logout</button>
@@ -257,6 +258,43 @@
     <!-- AdminLTE App -->
     <script src="{{asset('dist/js/adminlte.min.js')}}"></script>
 
+    <script>
+
+        $(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('#AdminInfoForm').on('submit', function (e) {
+                e.preventDefault();
+                $.ajax({
+                    url: $(this).attr('action'),
+                    method: $(this).attr('method'),
+                    data: new FormData(this),
+                    processData: false,
+                    contentType: false,
+                    beforeSend: function(){
+                        $(document).find('span.error-text').text('');
+                    },
+                    success: function(data){
+                        if(data.code == 0){
+                            $.each(data.error, function(prefix, val){
+                                $('span.'+prefix+'_error').text(val[0]);
+                            });
+                        }else{
+                            $('.admin_name').html($('#AdminInfoForm').find($('input[name="name"]')).val());
+                            alert(data.message); // Change 'msg' to 'message'
+                        }
+                    }
+                });
+            });
+
+
+        });
+
+    </script>
     @stack('script-form')
     @stack('script-table')
     </body>

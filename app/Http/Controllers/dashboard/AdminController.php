@@ -1,32 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\user;
+namespace App\Http\Controllers\dashboard;
 
+use Validator;
 use App\Models\User;
-use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
-class UserController extends Controller
+class AdminController extends Controller
 {
     //
-
     public function index()
     {
-        $orders = Order::where('user_id', Auth::id())->get();
-        return view('user.pages.orders.index', compact('orders'));
-    }
-    public function view($id)
-    {
-        $order = Order::where('id', $id)->where('user_id', Auth::id())->first();
-        return view('user.pages.orders.view', compact('order'));
-    }
-
-
-    public function profile()
-    {
-        return view('user.pages.profile');
+        return view('dashboard.profile.index');
     }
 
     public function updateInfo(Request $request)
@@ -40,6 +27,9 @@ class UserController extends Controller
             return response()->json(['status'=>0,'error'=>$validator->errors()->toArray()]);
         } else {
             $query = User::find(Auth::user()->id)->update([
+                'name'=>$request->name,
+                'email'=>$request->email,
+                'phone'=>$request->phone
             ]);
 
             if(!$query){
@@ -77,7 +67,6 @@ class UserController extends Controller
         }
     }
 
-    return redirect()->route('profile');
+    return redirect()->route('admin_info');
 }
-
 }
