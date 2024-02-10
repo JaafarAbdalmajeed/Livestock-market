@@ -34,6 +34,9 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::post('/update-user-info', [UserController::class, 'updateInfo'])->name('userUpdateInfo');
     Route::post('/update-image-user', [UserController::class, 'uploadImage'])->name('profile.user.image');
 
+    Route::get('/product/search', [ProductController::class, 'search'])->name('product.search');
+    Route::get('/factory/search', [FactoryController::class, 'search'])->name('factory.search');
+
 
 
 });

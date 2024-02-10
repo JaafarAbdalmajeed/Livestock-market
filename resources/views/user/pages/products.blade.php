@@ -13,15 +13,23 @@
 
         <!-- ======= Services Section ======= -->
         <section id="service" class="services pt-0">
+
         <div class="container" data-aos="fade-up">
 
             <div class="section-header">
             <span>Our Products</span>
             <h2>Our Products</h2>
+            <div class="form-group">
 
+            </div>
+            <form action="{{route('product.search')}}" class="form-search d-flex align-items-stretch mb-a " style="width: 40%" data-aos="fade-up" data-aos-delay="200">
+                <input name="search" type="text" class=" form-control" placeholder="">
+                <button type="submit " class="btn btn-primary">Search</button>
+            </form>
             </div>
 
             <div class="row gy-4">
+                @if(count($products) > 0)
                 @foreach ($products as $product)
                 <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
                     <div class="card">
@@ -35,6 +43,10 @@
                 </div>
                 <!-- End Card Item -->
                 @endforeach
+                @else
+                Not found
+
+                @endif
 
 
             </div>

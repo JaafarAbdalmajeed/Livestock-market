@@ -14,4 +14,18 @@ class FactoryController extends Controller
         $factories = Factory::all();
         return view('user.pages.factories', ['factories' => $factories]);
     }
+
+    public function search(Request $request)
+    {
+        $search = $request->search;
+        $factories = Factory::where(function($query) use($search){
+            $query->where('name', 'like', '%'.$search.'%');
+        })
+        ->orWhereHas('category', function($query) use($search){
+            $query->where('name', 'like', '%'.$search.'%');
+        })
+        ->get();
+
+        return view('user.pages.factories', compact('factories', 'search'));
+    }
 }

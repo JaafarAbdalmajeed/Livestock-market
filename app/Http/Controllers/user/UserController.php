@@ -51,33 +51,36 @@ class UserController extends Controller
     }
 
     public function uploadImage(Request $request)
-{
-    $user = User::find(Auth::id());
+    {
+        $user = User::find(Auth::id());
 
-    if ($request->hasFile('image')) {
-        // Retrieve the old image filename
-        $oldImage = $user->image;
+        if ($request->hasFile('image')) {
+            // Retrieve the old image filename
+            $oldImage = $user->image;
 
-        // Move the new image file to the 'uploads/users/' directory
-        $file = $request->file('image');
-        $extension = $file->getClientOriginalExtension();
-        $filename = time() . '.' . $extension;
-        $file->move('uploads/users/', $filename);
+            // Move the new image file to the 'uploads/users/' directory
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+            $file->move('uploads/users/', $filename);
 
-        // Update user's image attribute with the new filename
-        $user->image = $filename;
-        $user->save();
+            // Update user's image attribute with the new filename
+            $user->image = $filename;
+            $user->save();
 
-        // Delete the old image file if it exists
-        if ($oldImage) {
-            $oldImagePath = public_path('uploads/users/') . $oldImage;
-            if (file_exists($oldImagePath)) {
-                unlink($oldImagePath);
+            // Delete the old image file if it exists
+            if ($oldImage) {
+                $oldImagePath = public_path('uploads/users/') . $oldImage;
+                if (file_exists($oldImagePath)) {
+                    unlink($oldImagePath);
+                }
             }
         }
+
+        return redirect()->route('profile');
     }
 
-    return redirect()->route('profile');
-}
+
+
 
 }

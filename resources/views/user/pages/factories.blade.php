@@ -12,10 +12,15 @@
         <section id="service" class="services pt-0">
         <div class="container" data-aos="fade-up">
             <div class="section-header">
-            <span>Our Services</span>
-            <h2>Our Services</h2>
+            <form action="{{route('factory.search')}}" class="form-search d-flex align-items-stretch mb-a " style="width: 40%" data-aos="fade-up" data-aos-delay="200">
+                <input name="search" type="text" class=" form-control" placeholder="">
+                <button type="submit " class="btn btn-primary">Search</button>
+            </form>
             </div>
             <div class="row gy-4">
+                @if (count($factories) > 0)
+
+
                 @foreach ($factories as $factory)
                 <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
                     <div class="card">
@@ -27,6 +32,9 @@
                     </div>
                 </div><!-- End Card Item -->
                 @endforeach
+                @else
+                Not Found
+                @endif
             </div>
         </div>
         </section>
