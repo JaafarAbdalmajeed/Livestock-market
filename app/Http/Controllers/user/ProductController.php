@@ -29,4 +29,10 @@ class ProductController extends Controller
         return view('user.pages.products', compact('products', 'search'));
     }
 
+    public function factoryProducts(string $id)
+    {
+        $products = Product::where('factory_id',$id)->get();
+        return view('user.pages.products', ['products' => $products]);
+    }
+
 }

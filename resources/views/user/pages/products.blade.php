@@ -17,8 +17,7 @@
         <div class="container" data-aos="fade-up">
 
             <div class="section-header">
-            <span>Our Products</span>
-            <h2>Our Products</h2>
+
             <div class="form-group">
 
             </div>
@@ -34,7 +33,7 @@
                 <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
                     <div class="card">
                     <div class="card-img">
-                        <img src="{{asset('assets/img/storage-service.jpg')}}" alt="" class="img-fluid">
+                        <img src="{{asset('/uploads/products/'.$product->image)}}" style="height: 15em; width:100% ; object-fit: contain; padding:1em 1em" alt="" class="img-fluid">
                     </div>
                     <h3><a href="{{ route('product.details', ['id'=> $product->id])}}" class="stretched-link">{{$product->name}}</a></h3>
                     <p>title</p>

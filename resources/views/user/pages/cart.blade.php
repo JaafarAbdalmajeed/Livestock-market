@@ -149,15 +149,20 @@
                             'quantity': quantity
                         }),
                         contentType: 'application/json',
-
                         success: function (response) {
-
-                            // You can handle the success response as needed
-                        },
-                        error: function (xhr, status, error) {
-                            console.error(xhr.responseText);
-                            // Handle error (e.g., display an error message to the user)
+                        if (response && response.status === 'Quantity updated in the cart') {
+                            // Swal.fire("", response.status, "success");
+                            // // Optionally, you can refresh the cart or update the UI here
+                        } else {
+                            // console.error("Unexpected response:", response);
+                            // Swal.fire("Error", "Unexpected response from server", "error");
                         }
+                    },
+                    error: function (xhr, status, error) {
+                        // console.error("AJAX Error:", error);
+                        // Swal.fire("Error", "Error updating cart", "error");
+                    }
+
                     });
                 }
 
@@ -186,23 +191,29 @@
                     });
                 });
 
-                $('.changeQuantity').click(function (e) {
-                    var product_id = $(this).closest('product_data').find('product_id').val()
-                    var qty = $(this).closest('product_data').find('qty-input').val()
-                    data = {
-                        'product_id':product_id,
-                        'quantity':qty
-                    }
-                    $.ajax({
-                        method: "POST",
-                        url: "{{ route('cart.update') }}",
-                        data: data,
-                        success: function (response) {
-                            window.location.reload()
+                // $('.changeQuantity').click(function (e) {
+                //     var product_id = $(this).closest('product_data').find('product_id').val()
+                //     var qty = $(this).closest('product_data').find('qty-input').val()
+                //     data = {
+                //         'product_id':product_id,
+                //         'quantity':qty
+                //     }
+                //     $.ajax({
+                //         method: "POST",
+                //         url: "{{ route('cart.update') }}",
+                //         data: data,
+                //         success: function (response) {
+                //             Swal.fire("", response.status, "success");
+                //             // window.location.reload()
 
-                        }
-                    })
-                });
+                //         },
+                //         error: function (xhr, status, error) {
+                //             console.error(xhr.responseText);
+                //             // Handle error (e.g., display an error message to the user)
+                //         }
+
+                //     })
+                // });
 
 
 

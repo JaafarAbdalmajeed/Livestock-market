@@ -13,7 +13,7 @@
 
         <div class="row gy-4 product_data">
           <div class="col-lg-6 position-relative align-self-start order-lg-last order-first">
-            <img src="{{ asset('uploads/products/' . $product->image) }}" class="img-fluid" alt="">
+            <img src="{{ asset('uploads/products/' . $product->image) }}" style="height: 15em; width:100% ; object-fit: contain; padding:1em 1em"  class="img-fluid" alt="">
             <a href="3" class=""></a>
           </div>
           <div class="col-lg-6 content order-last  order-lg-first">
@@ -80,10 +80,13 @@
                     'quantity': quantity
                 }),
                 contentType: 'application/json',
-
-                success: function (response) {
-                    alert(response.status);
-                }
+                        success: function (response) {
+                            Swal.fire("", response.status, "success");
+                        },
+                        error: function (xhr, status, error) {
+                            console.error(xhr.responseText);
+                            // Handle error (e.g., display an error message to the user)
+                        }
             });
         });
         $('.increment-btn').click(function (e) {

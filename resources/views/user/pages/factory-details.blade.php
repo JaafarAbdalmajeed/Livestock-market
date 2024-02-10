@@ -14,16 +14,13 @@
 
         <div class="row gy-4">
           <div class="col-lg-6 position-relative align-self-start order-lg-last order-first">
-            <img src="assets/img/about.jpg" class="img-fluid" alt="">
-            <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox play-btn"></a>
+            <img src="{{ asset('uploads/factories/' . $factory->image) }}" style="height: 15em; width:100% ; object-fit: contain; padding:1em 1em"  class="img-fluid" alt="">
           </div>
           <div class="col-lg-6 content order-last  order-lg-first">
             <h3>About {{$factory->name}}</h3>
-            <p>
-              title
-            </p>
+
             <ul>
-                @foreach ($factory->description as $item)
+                @foreach ($factory->descriptions as $item)
                 <li data-aos="fade-up" data-aos-delay="100">
                     <i class="bi bi-diagram-3"></i>
                     <div>
@@ -35,8 +32,9 @@
                 @endforeach
             </ul>
           </div>
-        </div>
 
+        </div>
+        <a href="{{route('user.products.factory', ['id'=>$factory->id])}}" class="btn btn-primary">Products</a>
       </div>
     </section><!-- End About Us Section -->
 

@@ -25,7 +25,7 @@
                 <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
                     <div class="card">
                     <div class="card-img">
-                        <img src="assets/img/storage-service.jpg" alt="" class="img-fluid">
+                        <img src="{{asset('/uploads/factories/'.$factory->image)}}" style="height: 15em; width:100% ; object-fit: contain; padding:1em 1em" alt="" class="img-fluid">
                     </div>
                     <h3><a href="{{ route('factory.details', ['id' => $factory->id])}}" class="stretched-link">{{$factory->name}}</a></h3>
                     <p>title</p>

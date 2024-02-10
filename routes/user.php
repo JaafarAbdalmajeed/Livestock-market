@@ -13,6 +13,7 @@ use App\Http\Controllers\user\ProductDetailController;
 Route::middleware(['auth', 'user'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('user.index');
     Route::get('/user/products', [ProductController::class, 'index'])->name('user.products');
+    Route::get('/user/factory/products/{id}', [ProductController::class, 'factoryProducts'])->name('user.products.factory');
     Route::get('/user/products/{id}', [ProductDetailController::class, 'index'])->name('product.details');
     Route::get('/user/factories', [FactoryController::class, 'index'])->name('user.factories');
     Route::get('/user/factories/{id}', [FactoryDetailController::class, 'index'])->name('factory.details');

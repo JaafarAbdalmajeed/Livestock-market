@@ -35,4 +35,5 @@ class Factory extends Model
     {
         return $this->hasMany(Description::class, 'factory_id');
     }
+
 }
